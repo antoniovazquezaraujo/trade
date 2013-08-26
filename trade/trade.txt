@@ -1,0 +1,35 @@
+/*
+                                  Trade (TM)
+Juego basado en Space Trader, basado en Elite.
+Se trata de viajar de planeta en planeta con una nave de carga vendiendo mercancía.
+Es un juego de estrategia económica. La supervivencia y el progreso se consiguen
+tomando decisiones y corriendo riesgos.
+Cada planeta tiene un nombre y está a una distancia de los demás.
+En cada planeta hay una cantidad de recursos de cada tipo.
+Un recurso puede ser de tipo Agua, Madera, Metales, Comida, etc
+En cada planeta hay un tipo de gobierno que puede ser pacifista o no
+En cada planeta hay un nivel técnico que puede ser más alto o más bajo
+En los planetas con alto nivel técnico se pueden vender productos tecnológicos como robots
+En los planetas pacifistas es dificil vender armas
+En los planetas fascistas es fácil vender armas
+En los planetas en que no hay un recurso puede venderse a buen precio 
+En los planetas que hay un recurso puede comprarse a buen precio
+Una nave tiene bahias de carga para muchos tipos de productos
+Una nave tiene que llevar el combustible necesario para viajar a una distancia
+En un planeta hay noticias del tipo "Promulgada ley anti-contrabando" que se leen en el periódico
+Es útil comprar el periódico al llegar para decidir qué hacer
+En cada viaje te puede interceptar otro vehículo y puedes intentar escabullirte.
+Si tu nave está bien equipada y es moderna será fácil escabullirse
+Si te intercepta la policia y llevas carga ilegal, te la pueden quitar e incluso detenerte
+Si te interceptan piratas pueden robarte e incluso matarte.
+Si tu nave lleva un pod puedes escaparte con él y sobrevivir
+Una nave tiene espacio para contratar tripulación, cuanto mejor sea esta mejor funcionará
+Si un tripulante sabe pilotar cobra más pero se escapa facilmente de las intercepciones
+Si un tripulante sabe mecánica cobra más pero reparará las averías 
+*/
+////////////////////////////////////////////////////////////////////////////////
+#include <vector>
+#include <iostream>
+using namespace std;
+;
+//////////////// Vistas: ////////////////////////
