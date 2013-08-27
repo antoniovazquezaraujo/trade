@@ -27,9 +27,24 @@ Una nave tiene espacio para contratar tripulación, cuanto mejor sea esta mejor 
 Si un tripulante sabe pilotar cobra más pero se escapa facilmente de las intercepciones
 Si un tripulante sabe mecánica cobra más pero reparará las averías 
 */
-////////////////////////////////////////////////////////////////////////////////
-#include <vector>
-#include <iostream>
-using namespace std;
-;
-//////////////// Vistas: ////////////////////////
+class Producto{
+public:
+	string nombre;
+	int cantidad;
+	int precio;
+};
+class Mercado{
+public:
+	vector<Producto>oferta;
+	vector<Producto>demanda;
+	int dinero;
+};
+class Transporte{
+public:
+	vector<Producto>productos;
+};
+class Comerciante{
+public:
+	Transporte transporte;
+	int dinero;
+};
