@@ -127,3 +127,7 @@ Así que ese tipo de acciones o "disparadores" actuarían como efecto de adquiri
 de este tipo en otras acciones como encuentros, averías, escapes, o créditos bancarios. Bien. Parece interesante.
 Veamos entonces: voy a limpiar al máximo el proceso de transferencia de productos.
 
+Bien, simplificado al máximo. Como siempre, era mucho más simple de lo que imaginaba. Nada de mezclar cosas. Las transacciones comerciales solo
+son eso. Ahora viene lo dificil: los efectos que causa obtener un producto determinado en cada trader. A ver si sale.
+
+
