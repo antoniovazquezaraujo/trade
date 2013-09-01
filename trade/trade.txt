@@ -130,4 +130,6 @@ Veamos entonces: voy a limpiar al máximo el proceso de transferencia de product
 Bien, simplificado al máximo. Como siempre, era mucho más simple de lo que imaginaba. Nada de mezclar cosas. Las transacciones comerciales solo
 son eso. Ahora viene lo dificil: los efectos que causa obtener un producto determinado en cada trader. A ver si sale.
 
+Un trader tiene que tener un contenedor de Effects que actuen en caso de adquirir o vender un tipo de producto. Así que deberíamos poder aplicarle
+a ese conjunto un producto para que decidiese qué hacer. Aquí sí que parece que puede haber un Visitor.
 
