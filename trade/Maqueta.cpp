@@ -1,8 +1,8 @@
 #include <iostream>
+#include <map>
 using namespace std;
 
-class Comprador;
-class Vendedor;
+class Transferer;
 class Libro;
 class Producto {
 public:
@@ -10,84 +10,73 @@ public:
 		:precio(10){
 
 	}
-	virtual void comprar(Comprador *c, Vendedor* v);
-	virtual void vender(Vendedor *v, Comprador* c);
+	virtual void transferir(Transferer *c, Transferer* v);
 	float precio;
+	float cantidad;
 };
 class Droga: public Producto {
 public:
-	void comprar(Comprador *c, Vendedor* v);
-	virtual void vender(Vendedor *v, Comprador* c);
+	void transferir(Transferer *c, Transferer* v);
 };
 
 class Libro: public Producto {
 public:
-	void comprar(Comprador *c, Vendedor* v);
-	virtual void vender(Vendedor *v, Comprador* c);
+	void transferir(Transferer *c, Transferer* v);
+
 };
 class Comida: public Producto {
 };
 
-class Comprador {
+class Transferer {
 public:
-	virtual void comprarDroga(Droga * d) {
-	}
-	virtual void comprarLibro(Libro* l) {
-	}
-};
-class Vendedor {
-public:
-	virtual void venderDroga(Droga * d) {
-	}
-	virtual void venderLibro(Libro* l) {
-	}
-};
-
-class Jugador: public Comprador, public Vendedor {
-public:
-	Jugador()
-		:saldo(100){
+	Transferer()
+		:saldo(0){
 
 	}
-	virtual void venderDroga(Droga * d) {
-		cout << "Vendo droga" << endl;
-		saldo += d->precio;
+	virtual void entregar(Producto * p, int cantidad){
+		if(stock.count(p) > 0){
+			stock[p]-=cantidad;
+			saldo += p->precio;
+		}
 	}
-	virtual void venderLibro(Libro* l) {
-		cout << "Vendo libros" << endl;
-		saldo += l->precio;
+	virtual void recibir(Producto * p, int cantidad){
+		stock[p]+=cantidad;
+		saldo -= p->precio;
+
 	}
-	virtual void comprarDroga(Droga * d) {
-		cout << "Compro drogas" << endl;
-		saldo -= d->precio;
+	virtual void entregarDroga(Droga * d, int cantidad) {
+		entregar(d, cantidad);
 	}
-	virtual void comprarLibro(Libro* l) {
-		cout << "Compro libros" << endl;
-		saldo -= l->precio;
+	virtual void entregarLibro(Libro* l, int cantidad) {
+		entregar(l, cantidad);
 	}
+	virtual void recibirDroga(Droga * d, int cantidad) {
+		recibir(d, cantidad);
+	}
+	virtual void recibirLibro(Libro* l, int cantidad) {
+		entregar(l, cantidad);
+	}
+	map<Producto*, int> stock;
 	float saldo;
 };
 
-void Producto::comprar(Comprador *c, Vendedor* v) {
+
+void Producto::transferir(Transferer *c, Transferer* v) {
 	cout << "Me compran" << endl;
 }
-void Producto::vender(Vendedor *v, Comprador* c) {
-	cout << "Me venden" << endl;
-}
-void Droga::comprar(Comprador *c, Vendedor * v) {
-	c->comprarDroga(this);
-}
-void Droga::vender(Vendedor *v, Comprador * c) {
-	v->venderDroga(this);
+
+void Droga::transferir(Transferer *c, Transferer * v) {
+	c->entregarDroga(this,1);
+	v->recibirDroga(this,1);
 }
 
-void Libro::comprar(Comprador *c, Vendedor * v) {
-	c->comprarLibro(this);
+void Libro::transferir(Transferer *c, Transferer * v) {
+	v->entregarLibro(this,1);
+	v->recibirLibro(this,1);
 }
-void Libro::vender(Vendedor *v, Comprador * c) {
-	v->venderLibro(this);
-}
+class Jugador: public Transferer{
 
+};
 int main() {
 	Producto* cosas[3];
 	cosas[0] = new Droga;
@@ -97,9 +86,9 @@ int main() {
 	Jugador * v1 = new Jugador;
 	Jugador * v2 = new Jugador;
 	for (Producto* p : cosas) {
-		cout << "Antes de comprar: Comprador: " << v1->saldo << " Vendedor: " << v2->saldo<< endl;
-		p->comprar(v1, v2);
-		cout << "Antes de vender: Comprador: " << v1->saldo << " Vendedor: " << v2->saldo<< endl;
-		p->vender(v2, v1);
+		cout << "Antes de recibir: Transferer: " << v1->saldo << " Transferer: " << v2->saldo<< endl;
+		p->transferir(v1, v2);
+		cout << "Antes de entregar: Transferer: " << v1->saldo << " Transferer: " << v2->saldo<< endl;
+		p->transferir(v2, v1);
 	}
 }
