@@ -89,4 +89,6 @@ Veamos los actores de cada acción:
 	FluctuacionMercantil
 		Mercado, Legislación, SituaciónEconomica, SituacionPolitica
 	
-	
+Para aplicar el patron Visitor tenemos una jerarquía de objetos de tipo Action, que todos van a tener el método visit(Actor *)
+Los actores serán todos de tipo Actor, es decir, tendrán todos el método void accept(Action *) para recibir los efectos de una acción.
+Luego hay que crear las versiones concretas de cada uno.
