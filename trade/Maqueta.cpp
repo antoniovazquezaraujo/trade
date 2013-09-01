@@ -10,20 +10,20 @@ public:
 		:precio(10){
 
 	}
-	virtual void comprar(Comprador *c);
-	virtual void vender(Vendedor *v);
+	virtual void comprar(Comprador *c, Vendedor* v);
+	virtual void vender(Vendedor *v, Comprador* c);
 	float precio;
 };
 class Droga: public Producto {
 public:
-	void comprar(Comprador *c);
-	virtual void vender(Vendedor *v);
+	void comprar(Comprador *c, Vendedor* v);
+	virtual void vender(Vendedor *v, Comprador* c);
 };
 
 class Libro: public Producto {
 public:
-	void comprar(Comprador *c);
-	virtual void vender(Vendedor *v);
+	void comprar(Comprador *c, Vendedor* v);
+	virtual void vender(Vendedor *v, Comprador* c);
 };
 class Comida: public Producto {
 };
@@ -46,7 +46,7 @@ public:
 class Jugador: public Comprador, public Vendedor {
 public:
 	Jugador()
-		:saldo(10){
+		:saldo(100){
 
 	}
 	virtual void venderDroga(Droga * d) {
@@ -68,23 +68,23 @@ public:
 	float saldo;
 };
 
-void Producto::comprar(Comprador *c) {
+void Producto::comprar(Comprador *c, Vendedor* v) {
 	cout << "Me compran" << endl;
 }
-void Producto::vender(Vendedor *v) {
+void Producto::vender(Vendedor *v, Comprador* c) {
 	cout << "Me venden" << endl;
 }
-void Droga::comprar(Comprador *c) {
+void Droga::comprar(Comprador *c, Vendedor * v) {
 	c->comprarDroga(this);
 }
-void Droga::vender(Vendedor *v) {
+void Droga::vender(Vendedor *v, Comprador * c) {
 	v->venderDroga(this);
 }
 
-void Libro::comprar(Comprador *c) {
+void Libro::comprar(Comprador *c, Vendedor * v) {
 	c->comprarLibro(this);
 }
-void Libro::vender(Vendedor *v) {
+void Libro::vender(Vendedor *v, Comprador * c) {
 	v->venderLibro(this);
 }
 
@@ -94,11 +94,12 @@ int main() {
 	cosas[1] = new Libro;
 	cosas[2] = new Comida;
 
-	Jugador * v = new Jugador;
+	Jugador * v1 = new Jugador;
+	Jugador * v2 = new Jugador;
 	for (Producto* p : cosas) {
-		p->comprar(v);
-		cout << v->saldo << endl;
-		p->vender(v);
-		cout << v->saldo << endl;
+		cout << "Antes de comprar: Comprador: " << v1->saldo << " Vendedor: " << v2->saldo<< endl;
+		p->comprar(v1, v2);
+		cout << "Antes de vender: Comprador: " << v1->saldo << " Vendedor: " << v2->saldo<< endl;
+		p->vender(v2, v1);
 	}
 }
