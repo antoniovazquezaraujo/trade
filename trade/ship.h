@@ -1,4 +1,6 @@
 
+#include <string>
+using namespace std;
 class Ship{
 	public:
 		string model;
@@ -6,4 +8,5 @@ class Ship{
 		int shield;
 		int atack;
 		int damages;
+		bool is_valid(){ return true;}
 };

@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "universe.h"
-int main(){
+int main2(){
 	Universe u;
 	std::cout << "hola beta1.1";
 }

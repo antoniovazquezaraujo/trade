@@ -48,3 +48,45 @@ public:
 	Transporte transporte;
 	int dinero;
 };
+Esta sería una forma más genérica de la historia. Así se podrían hacer juegos más variados simplemente partiendo de esta base.
+Debería de haber una serie de mecanismos que actuasen como efecto de eventos. Por ejemplo, al comprar un tipo de producto, al venderlo,
+al cruzarse con un transporte de un tipo determinado, al entrar en un mercado concreto, al superar una velocidad, al pasar por un sitio, etc.
+Todos los eventos deverían poder crearse para cada juego de manera diferente, y sus efectos también.
+Así, podríamos hacer que cuando un camión con una carga de drogas se cruce con un vehículo policial, este le multe, etc.
+Se trataría de un conjunto de acciones protagonizadas por estructuras de objetos que generarían eventos, que al dispararse podrían actuar sobre
+las propiedades de esos o de otros objetos. Basicamente la historia del juego. Pero tendría que ser muy facil de programar, a partir de esta base.
+Definimos una acción genérica como algo así:
+class Action{
+	virtual void run(){
+	}
+};
+template <typename GameType>
+class AccionVender{
+	void run(){
+		game->comerciante->decMoney(game->producto->price);
+	}
+	GameType* game;
+};
+Veamos los actores de cada acción:
+	Compra
+		Comprador, Vendedor, Producto
+	Venta
+		Comprador, Vendedor, Producto
+	Intercepción
+		VehiculoInterceptor, VehiculoInterceptado, Legislación
+	Averia
+		Vehiculo, ServicioTecnico, Tripulación
+	Credito
+		Banco, Cliente
+	Ingreso
+		Banco, Cliente
+	Partida
+		Nave, Carga, Legislacion
+	Llegada
+		Nave, Carga, Legislación 
+	Repostaje
+		Nave, Cliente, Proveedor
+	FluctuacionMercantil
+		Mercado, Legislación, SituaciónEconomica, SituacionPolitica
+	
+	
