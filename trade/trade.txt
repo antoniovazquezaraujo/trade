@@ -101,3 +101,29 @@ otro y él tenga su control. Para esto se necesitaría un patrón FlightWeight, 
 Necesitamos tener punteros a objetos de un tipo concreto, derivado de producto, para que sea polimórfico. Pero vamos mejor a pensar en lugar de
 en productos en paquetes, que llevarían el producto y la cantidad. Un paquete puede dividirse en varios más pequeños. Y varios unirse en uno.
 Así sería más lógico usarlos, aunque el comparador los compara por nombre, como ahora. Veamos si funciona.
+No es lo que parece, en realidad ya funcionaba así. Pueden pasarse objetos en vez de punteros, no es real. Cada objeto es un paquete del producto
+y tiene una cantidad de unidades. No pasa nada.
+Las ideas que necesitabamos eran:
+	Que un producto concreto afecte de una forma concreta al comprador o al vendedor
+	Que un tipo de comprador decida también cómo le afecta un producto concreto.
+La primera idea se consigue teniendo una jerarquía de productos y haciendo que cada uno llame a los métodos que le reconocen a él. Pero eso no
+sirve más que para que el transferer le reconozca, ahora es él quien decide qué hacer. A partir de ahí, habrá tipos de transferer diferentes que
+decidirán los efectos que le causa cada producto. Heredando todos de un transferer genérico, que simplemente transfiere las cosas.
+
+Así que cuando creamos un producto más, tenemos que crear en el transferer madre el reconocimiento general del mismo, es decir:
+	recibirNuevo() y entregarNuevo()
+Ahora, la forma como afecta ese producto a cada uno se reescribe en los transferers que nos interesen, y así a los demás no les hará nada raro.
+El propio transferer tiene toda la información necesaria para realizar cualquier locura, así que ya está.
+
+Lo que ocurre es que hay una incongruencia: la clase Producto tiene un método para transferir entre dos transferers ... un producto!
+No tiene mucha lógica, llegado el momento será un obstáculo para la sencillez.
+Si eliminamos eso y lo ponemos como una función global o algoritmo transferir?
+Vamos a verlo.
+Realmente, el proceso de la transacción o transferencia de bienes en sí no tiene ningún interés, solamente es mantenimiento. Se cobra, se paga,
+se entrega la mercancía y nos vamos. La cosa sería crear una especie de sistema de evaluación o de efectos causados por cada operación. Simplemente
+tendremos una lista creciente y dinámica de estos chismes, que serán elegidos por el tipo de producto adquirido y convenientemente activados.
+Es decir, que puedo comprar un producto al principio sin que me dañe, y en medio del juego, entro en una zona en la que me daña o algo parecido.
+Así que ese tipo de acciones o "disparadores" actuarían como efecto de adquirir un elemento de su tipo preparado, incluso podría haber dispositivos
+de este tipo en otras acciones como encuentros, averías, escapes, o créditos bancarios. Bien. Parece interesante.
+Veamos entonces: voy a limpiar al máximo el proceso de transferencia de productos.
+
