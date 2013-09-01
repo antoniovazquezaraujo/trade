@@ -1,7 +1,7 @@
 
 #include <string>
 using namespace std;
-class Ship{
+class Transport{
 	public:
 		string model;
 		int speed;

@@ -10,10 +10,10 @@
 
 #include <string>
 using namespace std;
-#include "government.h"
-#include "market.h"
+#include "Government.h"
+#include "Market.h"
 
-class Planet{
+class Destiny{
 	public:
 		string name;
 		Government government;

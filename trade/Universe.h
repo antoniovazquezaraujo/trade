@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
-#include "planet.h"
+#include "Destiny.h"
 class Universe{
 	public:
-		vector<Planet> planets;
+		vector<Destiny> planets;
 };
